@@ -1,4 +1,4 @@
-from astrbot.api.all import *; from astrbot.api.event import AstrMessageEvent; import html
+from astrbot.api.all import *; from astrbot.api.event import AstrMessageEvent; import html, random
 
 try: import requests, aiohttp
 except ImportError:
@@ -10,24 +10,29 @@ except ImportError:
         importlib.invalidate_caches()
         import requests, aiohttp; del subprocess, sys, importlib
         logger.error("模块导入成功")
-    except Exception as e: logger.error(f"导入模块发生错误:\n{e}", exc_info=True); exit()
-except Exception as e: logger.error(f"导入模块发生错误:\n{e}", exc_info=True); exit()
+    except Exception as e: logger.error(f"导入模块发生错误:\n{e}", exc_info=True); raise ImportError
+except Exception as e: logger.error(f"导入模块发生错误:\n{e}", exc_info=True); raise RuntimeError
 
 @register("百度百科插件", "懒大猫", "百度百科插件", "6.6.6")
 class 百度百科(Star):
     def __init__(self, context: Context):
         super().__init__(context)
+        self.l用户代理池 = [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Edge/121.0.0.0",
+            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+        ]
         logger.info("百度百科插件加载完成")
 
-    @staticmethod
-    async def f(查询词条: str) -> str:
+    async def f(self, 查询词条: str) -> str:
         api地址 = "https://oiapi.net/api/BaiduEncyclopedia"; 参数 = {"msg": 查询词条}
+        代理 = random.choice(self.l用户代理池)
 
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get( url=api地址, params=参数, headers={
-                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                            "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"},
+                            "User-Agent": 代理},
                             timeout=aiohttp.ClientTimeout(total=10)
                 ) as 响应:
                     响应.raise_for_status(); 接口数据 = await 响应.json()
