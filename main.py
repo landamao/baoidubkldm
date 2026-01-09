@@ -1,17 +1,5 @@
-from astrbot.api.all import *; from astrbot.api.event import AstrMessageEvent; import html, random
-
-try: import requests, aiohttp
-except ImportError:
-    logger.error("模块导入失败，正在为你安装模块")
-    try:
-        import subprocess, sys, importlib
-        subprocess.check_call([ sys.executable, "-m", "pip", "install", "requests", "aiohttp",
-            "-i", "https://pypi.tuna.tsinghua.edu.cn/simple", "--trusted-host", "pypi.tuna.tsinghua.edu.cn"])
-        importlib.invalidate_caches()
-        import requests, aiohttp; del subprocess, sys, importlib
-        logger.error("模块导入成功")
-    except Exception as e: logger.error(f"导入模块发生错误:\n{e}", exc_info=True); raise ImportError
-except Exception as e: logger.error(f"导入模块发生错误:\n{e}", exc_info=True); raise RuntimeError
+from astrbot.api.all import logger, register, Star, Context, EventMessageType, asyncio, event_message_type
+from astrbot.api.event import AstrMessageEvent; import html, random, aiohttp
 
 @register("百度百科插件", "懒大猫", "百度百科插件", "6.6.6")
 class 百度百科(Star):
