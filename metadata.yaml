@@ -3,4 +3,4 @@ desc:  在聊天发送百度百科+词条内容，bot即可发送百度百科内
 help: 例如：百度百科Happy Sugar Life
 version: v6.6.6
 author: 懒大猫
-repo: https://github.com/landamao/baoidubkldm
+repo: https://github.com/landamao/baoidubkldm.git
