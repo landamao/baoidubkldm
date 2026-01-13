@@ -1,5 +1,6 @@
 name: astrbot_plugin_bdbk_landamao
-desc:  在聊天发送百度百科+词条内容，bot即可发送百度百科内容
+display_name: 百度百科解析插件
+desc: 在聊天发送百度百科+词条内容，bot即可发送百度百科内容
 help: 例如：百度百科Happy Sugar Life
 version: v6.6.6
 author: 懒大猫
